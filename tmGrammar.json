@@ -1,0 +1,95 @@
+{
+  "scopeName": "source.ul",
+  "patterns": [{ "include": "#name" }, { "include": "#body" }, { "include": "#variablesDefinition" }],
+  "repository": {
+    "name": {
+      "begin": "*",
+      "end": "*",
+      "beginCaptures": {
+        "0": { "name": "storage.type" }
+      },
+      "endCaptures": {
+        "0": { "name": "storage.type" }
+      },
+      "name": "entity.name.function",
+      "patterns": [{ "include": "#variable" }]
+    },
+    "variablesDefinition": {
+      "begin": "**",
+      "end": "***",
+      "beginCaptures": {
+        "0": { "name": "storage.type" }
+      },
+      "endCaptures": {
+        "0": { "name": "storage.type" }
+      },
+      "name": "",
+      "patterns": [{ "include": "#variable" }, { "include": "#string" }, { "include": "#number" }]
+    },
+    "string": {
+      "begin": "\"",
+      "end": "\"",
+      "beginCaptures": {
+        "0": { "name": "string" }
+      },
+      "endCaptures": {
+        "0": { "name": "string" }
+      },
+      "name": "string"
+    },
+    "body": {
+      "begin": "***",
+      "end": "(?=not)possible",
+      "beginCaptures": {
+        "0": { "name": "storage.type" }
+      },
+      "endCaptures": {
+        "0": { "name": "storage.type" }
+      },
+      "patterns": [{ "include": "#if-statment" }, { "include": "#variable" }, { "include": "#assignment" }, {"include": "#else-statment" }, {"include": "#end" }]
+    },
+    "assignment": {
+      "begin": "\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "0": { "name": "storage.type" }
+      },
+      "endCaptures": {
+        "0": { "name": "storage.type" }
+      },
+      "patterns": [{ "include": "#variable" }, { "include": "#operation" }]
+    },
+    "operation": {
+      "match":"+|-|*|/",
+      "name":"keyword.operator"
+    },
+    "number": {
+      "match": "[0-9]",
+      "name": "constant.numeric"
+    },
+    "variable": {
+      "match":"[A-z]",
+      "name":"variable"
+    },
+    "if-statment": {
+      "begin": "\\|",
+      "end": "\\|",
+      "beginCaptures": {
+        "0": { "name": "keyword.control" }
+      },
+      "endCaptures": {
+        "0": { "name": "keyword.control" }
+      },
+      "name": "expression.group",
+      "patterns": [{ "include": "#variable" }]
+    },
+    "else-statment": {
+      "match":"!",
+      "name": "keyword.control"
+    },
+    "end": {
+      "match":"^",
+      "name": "keyword.control"
+    }
+  }
+}
